@@ -75,9 +75,5 @@ The main goal is to create a convenient, flexible, and reliable custom firmware 
 - Automatic LED reset when DAW is closed (non-critical)
 - Song name from Fender Studio Show Page is not yet transmitted via MIDI
 
-## 6. Working Rules
-
-1. At every stage, refer to this `PROJECT_CONTEXT.md` file and update it.
-2. **Do not modify** stable versions without explicit agreement (`MAX Custom_v1.7.0-2.py`, `MAX Custom_v1.8.0-1.py`, etc.).
 3. New features should be added **by extending** the code whenever possible (add functions, avoid large replacements).
 
