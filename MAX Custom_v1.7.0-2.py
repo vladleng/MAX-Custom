@@ -16,6 +16,11 @@ Hardware Variants:
 Author: Max Cascone (based on work by Helmut Keller)
 Date: 2026-01-27
 """
+"""
+vladleng: 
+Added one_shot mode
+Added select mode
+"""
 
 print("\n=== MIDI CAPTAIN MAX Custom v1.7.0-2 ===\n")
 
