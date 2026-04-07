@@ -1,4 +1,3 @@
-# MAX-Custom
 # MIDI Captain MAX Custom Firmware
 
 **Enhanced bidirectional MIDI firmware for Paint Audio MIDI Captain MAX (and other variants)**
