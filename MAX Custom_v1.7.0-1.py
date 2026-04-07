@@ -16,6 +16,9 @@ Hardware Variants:
 Author: Max Cascone (based on work by Helmut Keller)
 Date: 2026-01-27
 """
+"""
+vladleng: Added one_shot mode
+"""
 
 print("\n=== MIDI CAPTAIN MAX v1.7.0-1 ===\n")
 
@@ -731,9 +734,7 @@ def handle_switches():
                         midi_send(ControlChange(cc, val, channel=channel))
                         print(f"[MIDI TX] Ch{channel+1} CC{cc}={val} (one_shot, switch {btn_num})")
                         status_label.text = f"TX CC{cc}={val} (one_shot)"
-                        # LED/display мен¤етс¤ “ќЋ№ ќ по feedback от хоста
-                    # при отпускании Ч ничего не делаем
-                    continue  # пропускаем дальнейшую обработку                
+                    continue            
                 if mode == "momentary":
                     val = cc_on if pressed else cc_off
                     set_button_state(btn_num, pressed)
