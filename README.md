@@ -3,7 +3,7 @@
 
 **Enhanced bidirectional MIDI firmware for Paint Audio MIDI Captain MAX (and other variants)**
 
-This is a custom, community-driven firmware based on the official MIDI Captain MAX by Max Cascone. It adds powerful new modes while keeping full compatibility with the original behavior.
+This is a custom, community-driven firmware based on the official MIDI Captain MAX by Max Cascone. It adds powerful new modes while keeping full compatibility with the original behavior. While Max's firmware is still under development, I'm adding the features I need to work right now.
 
 ---
 
