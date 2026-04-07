@@ -744,9 +744,7 @@ def handle_switches():
                         midi_send(ControlChange(cc, val, channel=channel))
                         print(f"[MIDI TX] Ch{channel+1} CC{cc}={val} (one_shot, switch {btn_num})")
                         status_label.text = f"TX CC{cc}={val} (one_shot)"
-                        # LED/display мен¤етс¤ “ќЋ№ ќ по feedback от хоста
-                    # при отпускании Ч ничего не делаем
-                    continue  # пропускаем дальнейшую обработку   
+                    continue
             elif message_type == "pc" and pressed:
                 btn_state.advance_keytime()
                 state_cfg = get_button_state_config(btn_config, btn_state.get_keytime())
@@ -809,7 +807,7 @@ def handle_switches():
                 midi_send(ProgramChange(program, channel=channel))
                 print(f"[MIDI TX] Ch{channel+1} PC{program} (switch {btn_num})")
                 status_label.text = f"TX PC{program}"
-                # Select-режим (радиогруппа для PC-кнопок)
+                # Select-mode
                 update_pc_select_group(program, channel)                
                 flash_pc_button(btn_num, btn_config.get("flash_ms", PC_FLASH_DURATION_MS))
 
