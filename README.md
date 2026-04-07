@@ -1,79 +1,94 @@
 # MAX-Custom
-# PROJECT_CONTEXT.md
+# MIDI Captain MAX Custom Firmware
 
-**Project: MIDI Captain MAX Custom (MAX) — Custom Firmware**
+**Enhanced bidirectional MIDI firmware for Paint Audio MIDI Captain MAX (and other variants)**
 
-**Current active version:** `MAX Custom_v1.8.0-1.py`  
-**Last updated:** April 05, 2026  
-**Project status:** Stage 1 completed, Stage 2 completed, Stage 3 completed
+This is a custom, community-driven firmware based on the official MIDI Captain MAX by Max Cascone. It adds powerful new modes while keeping full compatibility with the original behavior.
 
-## 1. Project Goals
+---
 
-The main goal is to create a convenient, flexible, and reliable custom firmware for the **Paint Audio MIDI Captain MAX**, based on the official MAX firmware while preserving maximum compatibility.
+## ✨ Features
 
-**Key Principles:**
-- Add new modes (`one_shot`, `select` / radio, `long_shot`, etc.) **modularly**, without breaking existing code.
-- `one_shot` mode must work for **any** button.
-- `select` (radio) mode must work **only** for PC buttons (`type: "pc"`), as an addition to existing behavior.
-- When a new official MAX version is released, our patches should be easy to re-apply.
-- Never modify stable versions without explicit agreement.
+- **Fully config-driven** via `config.json` — no code changes needed for most customizations
+- **Bidirectional MIDI** — host (DAW/software) can control LEDs and display in real time
+- **Multiple button modes**:
+  - `toggle` (default)
+  - `momentary`
+  - `one_shot` — sends value only on press (no release message)
+  - `select` (radio group) — **only for PC buttons** (`type: "pc"`). One button stays lit, others in group turn off
+- Support for **PC**, **CC**, **Note**, **PC Inc/Dec**
+- **Keytimes** support — multi-state buttons with different colors/labels per state
+- **Encoder** with optional stepped mode and push button
+- **Expression pedals** with auto-calibration and hysteresis
+- **Multi-device support**: STD10, Mini6, Nano4, Duo2, One1 (auto-detection)
+- Beautiful color TFT display with customizable fonts and layout
+- 5-pin DIN MIDI + USB MIDI with transparent thru
+- NeoPixel LED control with dim/off modes
 
-## 2. Files and Versions
+### New in this Custom Fork
 
-**Active versions:**
-- `MAX Custom_v1.8.0-1.py` — current main version (fork of MAX_v1.8.0 + our modifications)
-- `config02.json` — active configuration file
+- **one_shot** mode (universal for any button)
+- **select** radio mode for Program Change buttons
+- Modular architecture — easy to add new modes (e.g. upcoming `long_shot`)
+- Clean separation of core logic and custom extensions
 
-**Frozen / Reference versions:**
-- `MAX_v1.8.0.py` — clean official version from Max Cascone
-- `MAX Custom_v1.8.0-1.py` — stable version with `one_shot` and `select` modes (Stages 1–3)
+---
 
-**Supporting materials:**
-- `.msl` scripts, original Helmut firmware, etc.
+## 📁 Project Structure
 
-## 3. Completed Stages
+- `MAX Custom_v1.8.0-1.py` — **current stable custom firmware**
+- `MAX_v1.8.0.py` — clean official base version
+- `PROJECT_CONTEXT.md` — detailed project roadmap and rules
+- `config02.json` — example configuration
+- `core/` — reusable modules (colors, config, button logic)
+- `devices/` — hardware definitions for different MIDI Captain models
 
-### Stage 1 — Adding universal `one_shot` mode
-**Status:** Completed  
-**Date:** March 31, 2026  
-**Base:** `MAX_v1.7.0.py` (clean)  
-**Result:** `MAX Custom_v1.7.0-1.py`
+---
 
-**Achievements:**
-- Added `"one_shot"` mode for any button
-- Sends value only on press, no release (0) message
-- LED and display state change **only** via host feedback
+## 🚀 Getting Started
 
-### Stage 2 — Adding `select` (radio) mode for PC buttons
-**Status:** Completed  
-**Date:** April 05, 2026  
-**Base:** `MAX Custom_v1.7.0-1.py`
+1. Download the latest `MAX Custom_v1.8.0-1.py`
+2. Put it on your MIDI Captain in USB drive mode (hold button 1 while powering on)
+3. Edit `config.json` to match your needs
+4. Reboot the device
 
-**Goal:**
-- Add mode `"mode": "select"` **only** for buttons with `type: "pc"`
-- When pressed, the button stays lit permanently; all other buttons in the same group turn off
-- Do not break existing `toggle` and flash behavior for PC buttons
-- Keep changes modular (add functions, minimal replacements)
+See `PROJECT_CONTEXT.md` for full development history and contribution guidelines.
 
-### Stage 3 — Porting `one_shot` and `select` to MAX_v1.8.0 platform
-**Status:** Completed  
-**Date:** April 06, 2026  
-**Base:** `MAX_v1.8.0.py`  
-**Result:** `MAX Custom_v1.8.0-1.py`
+---
 
-## 4. Future Plans
+## Supported Devices
 
-### Stage 4 — `long_shot` mode (long press)
-**Status:** Planned
+- **MIDI Captain STD10** (10 switches + encoder + 2 expression)
+- **Mini6**, **Nano4**, **Duo2**, **One1**
 
-**Goals:**
-- New mode that triggers after holding a button for 500 ms
-- Can be combined with other modes (`one_shot`, `toggle`, `select`, etc.)
-- Must be added modularly without breaking core logic
+Automatic hardware detection included.
 
-## 5. Known Issues / Deferred Tasks
-- Automatic LED reset when DAW is closed (non-critical)
-- Song name from Fender Studio Show Page is not yet transmitted via MIDI
+---
 
-3. New features should be added **by extending** the code whenever possible (add functions, avoid large replacements).
+## Configuration Example
 
+```json
+{
+  "buttons": [
+    {
+      "label": "Play",
+      "type": "note",
+      "mode": "toggle",
+      "note": 94,
+      "color": "green"
+    },
+    {
+      "label": "Var 1",
+      "type": "pc",
+      "mode": "select",
+      "program": 0,
+      "color": "orange"
+    },
+    {
+      "label": "Reset",
+      "mode": "one_shot",
+      "cc": 117,
+      "color": "magenta"
+    }
+  ]
+}
