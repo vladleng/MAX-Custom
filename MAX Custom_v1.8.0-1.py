@@ -19,6 +19,10 @@ Hardware Variants:
 Author: Max Cascone (based on work by Helmut Keller)
 Date: 2026-01-27
 """
+"""
+vladleng: 
+Moving one_shot and select mode to a new database MAX 1.8.0
+"""
 
 print("\n=== MIDI CAPTAIN MAX Custom 1.8.0-1 ===\n")
 
